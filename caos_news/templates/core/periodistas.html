@@ -1,0 +1,67 @@
+{% extends "core/plantilla.html" %}
+{% load static %}
+
+{% block contenido %}
+    <main>
+        <!--BANNER-->
+        <section class="py-5 text-center container banner-custom container-fluid" style="border-bottom: solid rgb(0, 0, 66) 10px;">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-dark">NUESTROS PERIODISTAS</h1>
+                </div>
+            </div>
+        </section>
+
+        <!--periodistas-->
+
+        <section class="container periodistas" data-aos="fade-down">
+            <div class="row">
+                <div class="col colcustom">
+                    <a href="periodista1.html">
+                        <img src="{% static 'img/periodistas/periodista1.jpg' %}" alt=""></a>
+                    <a href="periodista1.html">
+                        <h1>Misael Ocas</h1>
+                    </a>
+                </div>
+                <div class="col colcustom">
+                    <a href="periodista2.html">
+                        <img src="{% static 'img/periodistas/periodista2.jpg' %}" alt=""></a>
+                    <a href="periodista2.html">
+                        <h1>Amaro Rodriguez</h1>
+                    </a>
+                </div>
+                <div class="col colcustom">
+                    <a href="periodista3.html">
+                        <img src="{% static 'img/periodistas/periodista3.jpg' %}" alt=""></a>
+                    <a href="periodista3.html">
+                        <h1>Diego Altamirano</h1>
+                    </a>
+                </div>
+                <div class="col colcustom">
+                    <a href="periodista4.html">
+                        <img src="{% static 'img/periodistas/periodista4.png' %}" alt=""></a>
+                    <a href="periodista4.html">
+                        <h1>Nicolas Carrasco</h1>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+{% endblock contenido %}
+
+
+    <!--JS-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js " integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG " crossorigin="anonymous "></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js " integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc " crossorigin="anonymous "></script>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js "></script>
+    <script>
+        AOS.init();
+    </script>
+    <!--valor dolar-->
+    <script src="{% static 'js/valordolar.js' %}"></script>
+</body>
+
+</html>

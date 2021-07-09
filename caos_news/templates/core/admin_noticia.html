@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <!--estilos-->
+    <link rel="stylesheet" href="{% static 'css/estilos.css'%}">
+    <link rel='stylesheet' href="{% static 'css/estilos.css' %}">
+    <link rel='stylesheet' href="{% static 'css/registro.css' %}">
+    <script src='lib/jquery-3.1.1.js'></script>
+    <script src="dist/jquery.validate.min.js"></script>
+    <!--bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <!--ewe-->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caos News</title>
+</head>
+
+<body>
+
+    <!--NAVBAR-->
+
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'index'%}"> <img src="{% static 'img/caos news.png'%}" alt="" width="100px"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <form class="d-flex" method="POST" action="{% url 'busqueda' %}">
+                        {% csrf_token %}
+                        <input class="form-control me-2" type="search" placeholder="Buscador" aria-label="Search" name="txtBusqueda">
+                        <button class="btn btn-light" type="submit">Buscar</button>
+                    </form>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'index' %}">INICIO</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'galeria' %}">GALERIA</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                NOTICIAS
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'periodistas' %}">PERIODISTAS</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="{% url 'categorias' %}">CATEGORIAS</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'formulario' %}">FORMULARIO</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" type="button" value="Recuperar Dolar" onclick="recupera()">VALOR DOLAR</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" type="button" value="Recuperar Dolar" onclick="recupera()">METEOROLOGIA</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'consumoapi' %}">CONSUMO API</a>
+                        </li>
+                    </ul>
+
+                    {% if user.is_authenticated %}
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'LOGOUT' %}">Cerrar Sesion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user' %}">Usuario: {{user.first_name}} {{user.last_name}}</a>
+                        </li>
+                    </ul>
+                    {%else%}
+                    <a href="{% url 'login' %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="45px" height="45px" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path
+                                d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                        </svg>
+                    </a>
+                    {%endif%}
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!--contenido-->
+    <main>
+        <!--BANNER-->
+        <section class="py-5 text-center container-flex banner-custom container-fluid">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                </div>
+            </div>
+        </section>
+
+        <!--CRUD-->
+        <section style=" margin-top: 40%; margin-left: 25%; display: block;" class="container">
+            <div class="cod-container-cont">
+                <div class="form-header">
+                    <img src="{% static 'img/caos news.png' %}" alt="Logo">
+                </div>
+
+
+                <div class=" container" id="formulario-contacto">
+
+
+                    <form class="cod-form-cont" action="{% url 'admin_noticia'%}" method="POST" enctype="multipart/form-data" onsubmit="return valida()">
+                        {% csrf_token %}
+                        <div class="form-title">
+                            <h3>Administrador de noticias</h3>
+                        </div>
+                        <section>
+                            <div style="color: rgb(4, 114, 0); font-size: 25px; text-align: center;">
+                                {{msg}}
+                            </div>
+                        </section>
+
+                        <div class="input-group">
+                            <label class="" for="create-noticia">Título</label>
+                            <input type="text" class="form-input" name="txtTitulo" id="create-noticia" required minlength="5" title="Título">
+
+                        </div>
+
+                        <div class="input-group">
+                            <label class="" for="create-noticia">Subtitulo</label>
+                            <input type="text" class="form-input" name="txtSubtitulo" id="create-noticia" required minlength="5" title="Título">
+
+                        </div>
+
+                        <div class="input-group">
+                            <label class="" for="cont-telefono"></label>
+                            <input type="date" class="form-input" name="txtFecha" id="create-date" required>
+
+                        </div>
+
+                        <div class="input-group">
+                            <label class="" for="create-ubicacion">Ubicación</label>
+                            <input type="text" class="form-input" name="txtUbicacion" id="create-ubicacion" required minlength="5">
+
+                        </div>
+
+                        <div class="input group">
+                            <div>
+                                <p2 style="Font-family: 'Noticia Text', serif;">Periodista</p2>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="txtAutor" id="txtAutor" value="{{user.first_name}} {{user.last_name}}" required> {{user.first_name}} {{user.last_name}} </input><br>
+                                <a class="nav-link" href="{% url 'LOGOUT' %}" style="float: left;">¿No eres {{user.first_name}} {{user.last_name}}? cambiar a tu usuario </a><br><br>
+
+                            </div>
+                        </div>
+
+                        <p2 style="Font-family: 'Noticia Text', serif;">Imágenes noticia (mínimo 1)</p2>
+                        <div class="input-group">
+                            <input type="file" class="form-input" value="Bucar Imagen" name="txtImagen" id="txtImagen">
+                        </div>
+
+                        <div>
+                            <p2 style="Font-family: 'Noticia Text', serif;">Contenido de la noticia</p2>
+                            <textarea name="txtContenido" id="Descripción" cols="85" rows="6" required minlength="5" maxlength="5000"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <p2 style="Font-family: 'Noticia Text', serif;">Categoria</p2>
+                            <select style="margin-bottom: 10px; width: 100%;" name="txtCategoria" class="col-100">
+                                {%for item in tipos %}}
+                                <option value="{{item.nombre_cat}}"> {{item.nombre_cat}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+
+                        <!--botones-->
+                        <div class="input-group">
+                            <input type="submit" class="form-input" value="subir" name="action">
+                        </div>
+                        <!--eliminar-->
+                        <div class="input-group">
+                            <input type="submit" class="form-input" value="eliminar" name="action">
+                        </div>
+                        <!--actualizar-->
+                        <div class="input-group">
+                            <input type="submit" class="form-input" value="actualizar" name="action">
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+        <!--Gestor de noticias-->
+        <section>
+            <div id="listado" style="margin:50px">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th>Titulo</th>
+                            <th>Fecha</th>
+                            <th>Ubicacion</th>
+                            <th>Imagen</th>
+                            <th>Categoria</th>
+                            <th>Operaciones</th>
+                            <th>Publicar</th>
+                            <th>Comentario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for reg in noticia %}
+                        <tr>
+                            <td>{{reg.titulo}}</td>
+                            <td>{{reg.fecha}}</td>
+                            <td>{{reg.ubicacion}}</td>
+                            <td>
+                                <img src="{{reg.portada.url}}" width="150px" height="150px"></img>
+                            </td>
+                            <td>{{reg.cat}}</td>
+                            <td>
+                                <button class=" btn btn-danger" onclick="eliminar('{{reg.titulo}}')">
+                                    Eliminar
+                                </button>
+
+                                <button class="btn btn-warning" onclick="modificar('{{reg.titulo}}')">Modificar</button>
+                                <button class="btn btn-primary" onclick="galeria('{{reg.titulo}}')" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar Imagen</button>
+
+
+                            </td>
+                            <td>
+                                {% if reg.publicar %} PUBLICADO {% else %}
+                                <DIV style="color: red; "> NO PUBLICADO </DIV>
+                                {% endif %}
+                            </td>
+
+
+
+                            <td>
+                                {{reg.comentario}}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar imagen a galería</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <form action="{% url 'insertar_gale' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div>Agregar imagen a la galería de la noticia:
+                            <div style="color: rgb(26, 104, 206); font-size: x-large;" id="titulo_img"></div>
+                            <input type="file" name="txtImg" id="txtImg">
+                            <input type="hidden" name="txtTitulo" id="txtTitulo">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        </div>
+                </form>
+                </div>
+            </div>
+        </div>
+
+
+        <!--JS-->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11 "></script>
+        <script>
+            Swal.bindClickHandler()
+
+            Swal.mixin({
+                toast: true,
+            }).bindClickHandler('data-swal-toast-template')
+        </script>
+
+        <script>
+    function eliminar(titulo) {
+        Swal.fire({
+            title: 'Desea eliminar la noticia ' + titulo + ' ?',
+            showDenyButton: true,
+            confirmButtonText: `Eliminar`,
+            denyButtonText: `Cancelar`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.href = '/eliminar_noticia/' + titulo + '/';
+            }
+        })
+
+
+    }
+
+            function modificar(titulo) {
+                location.href = '/modificar_noticia/' + titulo + '/';
+            }
+
+            function galeria(titulo) {
+                document.getElementById("titulo_img").innerHTML = titulo;
+                document.getElementById("txtTitulo").value = titulo;
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js " integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG " crossorigin="anonymous "></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js " integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc " crossorigin="anonymous "></script>
+
+        <script src="https://unpkg.com/aos@next/dist/aos.js "></script>
+        <script>
+            AOS.init();
+        </script>
+        <!--valor dolar-->
+        <script src="{% static 'js/valordolar.js' %} "></script>
+
+
+
+</body>
+
+</html>

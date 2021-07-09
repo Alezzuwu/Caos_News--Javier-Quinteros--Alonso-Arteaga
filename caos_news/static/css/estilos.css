@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Noticia+Text&display=swap');
+@import url(categorias.css);
+@import url(noticias.css);
+@import url(galeria.css);
+@import url(periodistas.css);
+@import url(user.css);
+* {
+    margin: 0;
+    padding: 0;
+}
+
+footer .contenedor {
+    display: flex;
+    /* se mostrara como elementos flexibles*/
+    flex-wrap: wrap;
+    /* se acomodan unas bajo otras */
+    justify-content: center;
+    padding-bottom: 25px;
+    height: 20px;
+}
+
+footer .contenedor1 {
+    display: flex;
+    /* se mostrara como elementos flexibles*/
+    flex-wrap: wrap;
+    /* se acomodan unas bajo otras */
+    justify-content: center;
+    padding-bottom: 25px;
+    height: 30px;
+    background: black;
+}
+
+footer {
+    border-top: solid black 10px;
+    background-color: rgb(48, 48, 48);
+}
+
+footer a {
+    text-decoration: none;
+}
+
+footer .foottext {
+    color: white;
+    font-size: 20px;
+    font-family: initial;
+}
+
+.navbar-custom {
+    background-color: rgba(33, 44, 109, 0.938);
+}
+
+.carousel-custom {
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 50px;
+    border-top: solid rgb(0, 0, 66) 10px;
+}
+
+.banner-custom {
+    margin-top: 50px;
+    font-family: 'Noticia Text', serif;
+    color: rgb(0, 0, 0);
+}
+
+.textbanner {
+    color: rgb(0, 0, 0);
+    font-family: 'Noticia Text', serif;
+}
+
+.articulo {
+    text-align: center;
+}

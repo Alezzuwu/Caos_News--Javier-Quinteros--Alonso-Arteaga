@@ -1,0 +1,39 @@
+.user {
+    font-family: 'Noticia Text', serif;
+}
+
+.user img {
+    height: 400px;
+    width: 300px;
+    margin-bottom: 10px;
+    border: solid rgba(33, 44, 109, 0.938);
+    border-radius: 10px;
+}
+
+.user button {
+    margin-top: 25%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-right: 20px;
+    padding-left: 20px;
+    font-size: 30px;
+    border-radius: 50px;
+    color: white;
+    background: rgba(33, 44, 109, 0.938);
+    ;
+}
+
+.user button:hover {
+    background: rgb(0, 0, 66) 10px;
+    transition: 0.5s;
+}
+
+.rowuser {
+    margin-bottom: 100px;
+}
+
+.user-banner {
+    margin-top: 50px;
+    font-family: 'Noticia Text', serif;
+    color: rgb(0, 0, 0);
+}

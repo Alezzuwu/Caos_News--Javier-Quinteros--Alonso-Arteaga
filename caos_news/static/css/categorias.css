@@ -1,0 +1,27 @@
+.carta {
+    border-top: solid rgb(0, 0, 66) 10px;
+    margin-bottom: 100px;
+    font-family: 'Noticia Text', serif;
+}
+
+.carta a {
+    text-decoration: none;
+    color: black;
+}
+
+.carta h3 {
+    text-align: center;
+}
+
+.carta h1 {
+    text-align: center;
+}
+
+.colcustom {
+    text-align: center;
+}
+
+.carta img {
+    width: 100%;
+    height: 250px;
+}

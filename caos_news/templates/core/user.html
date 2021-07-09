@@ -1,0 +1,109 @@
+{% extends "core/plantilla.html" %} {% load static %} {% block contenido %}
+<main>
+    <!--BANNER-->
+    <section class="py-5 text-center container-flex banner-custom container-fluid">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-dark">Herramientas</h1>
+            </div>
+        </div>
+    </section>
+    <!--Menu usuario-->
+    <section class="container user">
+        <div class="row rowuser" style="margin-bottom: 100px;">
+
+            <div class="col colcustom">
+                <a href="{% url 'admin_noticia' %}">
+                    <button>
+                            Administrador de noticias
+                        </button>
+                </a>
+            </div>
+
+            <div class="col colcustom">
+                <a href="{% url 'subirnoticia' %}">
+                    <button>
+                            Subir noticia
+                        </button>
+                </a>
+            </div>
+        </div>
+    </section>
+    </section>
+
+    <main>
+        <!--BANNER-->
+        <section class="py-5 text-center container banner-custom container-fluid" style="border-bottom: solid rgb(0, 0, 66) 10px;">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-dark">Informacion</h1>
+                </div>
+            </div>
+        </section>
+
+        <!--periodistas-->
+
+        <section class="container periodistas" data-aos="fade-left">
+            <div class="row">
+                <div class="col colcustom">
+
+                    <img src="{% static 'img/periodistas/periodista3.jpg'%}" alt="">
+
+                    <h1>{{user.first_name}} {{user.last_name}}</h1>
+
+                </div>
+                <div class="col">
+                    <ul>
+                        <li>{{user.first_name}}</li>
+                        <li>{{user.last_name}}</li>
+                        <li>{{user.email}}</li>
+                        <li>{{cant}}</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="carta container" data-aos="fade">
+            <div>
+
+                <h1>Noticias del periodista</h1>
+
+
+
+                <div class="row">
+                    {% for reg in noticia %}
+                    <div class="col colcustom">
+                        <a href="mostrarnoticia/{{reg.titulo}}"> <img src="{{reg.portada.url}}" alt=" " width="400px " height="250px "></a>
+                        <a href="mostrarnoticia/{{reg.titulo}}">
+                            <h3>{{reg.titulo}}</h3>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+</main>
+
+
+{% endblock contenido %}
+
+<!--JS-->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js " integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG " crossorigin="anonymous "></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js " integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc " crossorigin="anonymous "></script>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js "></script>
+<script>
+    AOS.init();
+</script>
+<!--valor dolar-->
+<script src="{% static 'js/valordolar.js' %}"></script>
+</body>
+
+</html>

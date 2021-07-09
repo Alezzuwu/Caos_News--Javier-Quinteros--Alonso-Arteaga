@@ -1,0 +1,68 @@
+.noticia {
+    margin: 0;
+    padding: 0;
+    margin-top: 100px;
+}
+
+.noticia h5 {
+    text-align: right;
+    height: 40px;
+    padding: 5px;
+}
+
+.noticia h4 {
+    width: 100%;
+}
+
+.noticia a {
+    text-decoration: none;
+    color: black;
+}
+
+.ubicacion {
+    width: 500px;
+    height: 40px;
+    padding: 5px;
+    padding-left: 10px;
+    font-family: 'Noticia Text', serif;
+}
+
+.categoria {
+    background: rgb(209, 209, 209);
+    width: 200px;
+    height: 40px;
+    padding: 5px;
+    padding-left: 20px;
+    font-family: 'Noticia Text', serif;
+    border-radius: 20px;
+}
+
+.periodista {
+    background: rgba(33, 44, 109, 0.938);
+    color: white;
+    width: auto;
+    height: 40px;
+    padding: 5px;
+    padding-left: 20px;
+    font-family: 'Noticia Text', serif;
+    border-radius: 20px;
+}
+
+.titulo {
+    font-family: 'Noticia Text', serif;
+}
+
+.titulo p {
+    font-family: 'Noticia Text', serif;
+    border-bottom: solid rgb(0, 0, 66) 10px;
+}
+
+.contenido p {
+    font-family: 'Noticia Text', serif;
+    font-size: 17px;
+}
+
+.imgnoticia {
+    height: 660px;
+    width: 100%;
+}

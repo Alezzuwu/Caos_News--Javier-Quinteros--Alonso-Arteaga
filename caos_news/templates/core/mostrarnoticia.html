@@ -1,0 +1,76 @@
+{% extends "core/plantilla.html" %} {% load static %} {% block contenido %}
+<main>
+    <!--Datos-->
+    <section class="container noticia">
+        <div class="row">
+            <div class="col">
+                <a href="{% url 'categorias' %}">
+                    <h4 class="categoria">{{noticia.cat.nombre_cat}}</h4>
+                </a>
+            </div>
+            <div class="col">
+                <a href="{% url 'user' %}}">
+                    <h4 class="periodista">{{noticia.autor}}</h4>
+                </a>
+            </div>
+            <div class="col">
+                <h4 class="ubicacion">{{noticia.ubicacion}}</h4>
+            </div>
+            <div class="col align-self-end">
+                <h5>{{noticia.fecha}}</h5>
+            </div>
+        </div>
+    </section>
+    <!--titulo-->
+    <section class="container titulo">
+        <div class="row">
+            <div class="col">
+                <h1 class="fw-dark">{{noticia.titulo}}
+                </h1>
+                <p class="lead textbanner">{{noticia.subtitulo}}
+
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!--Contenido-->
+    <section class="container contenido">
+        <div class="row ">
+            <div style="width: 1300px; height: 650px; margin-bottom: 30px;">
+
+                <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{noticia.portada.url}}" width="1300px" height="650px" class="d-block w-100" alt="...">
+                        </div>
+                        {% for reg in galeria %}
+                        <div class="carousel-item">
+                            <img src="{{reg.portada.url}}" width="1300px" height="650px" class="d-block w-100" alt="...">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row container">
+            <p>{{noticia.contenido}}</p>
+
+        </div>
+    </section>
+
+
+
+</main>
+
+{% endblock contenido %}

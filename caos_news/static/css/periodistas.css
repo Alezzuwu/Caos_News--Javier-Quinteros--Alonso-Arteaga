@@ -1,0 +1,22 @@
+.periodistas {
+    font-family: 'Noticia Text', serif;
+    margin-top: 50px;
+}
+
+.periodistas img {
+    height: 400px;
+    width: 300px;
+    border-radius: 50px;
+    border: solid black;
+}
+
+.periodistas a {
+    text-decoration: none;
+    color: black;
+}
+
+.periodistas li {
+    margin-top: 50px;
+    font-family: 'Noticia Text', serif;
+    font-size: 20px;
+}
